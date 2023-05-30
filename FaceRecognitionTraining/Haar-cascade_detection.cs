@@ -10,6 +10,6 @@ namespace FaceRecognitionTraining
 {
     internal class Haar_cascade_detection
     {
-
+        
     }
 }
