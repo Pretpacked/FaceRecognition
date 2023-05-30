@@ -4,6 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="C:\Users\ricardo\Downloads\opencv\build">
+      <Alias>opencv</Alias>
+    </Using>
+  </ItemGroup>
 
 </Project>

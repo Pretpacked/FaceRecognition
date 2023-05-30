@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
+    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
+    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "projectUniqueName": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
         "projectName": "FaceRecognitionTraining",
-        "projectPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "projectPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
         "packagesPath": "C:\\Users\\ricardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\FaceRecognition\\FaceRecognitionTraining\\obj\\",
+        "outputPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,20 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Emgu.CV": {
+              "target": "Package",
+              "version": "[4.7.0.5276, )"
+            },
+            "OpenCV": {
+              "target": "Package",
+              "version": "[2.4.11, )"
+            },
+            "OpenCvSharp4": {
+              "target": "Package",
+              "version": "[4.7.0.20230115, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
