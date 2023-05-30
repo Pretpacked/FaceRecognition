@@ -9,8 +9,8 @@ namespace FaceRecognitionTraining
 	{
 		public VideoFeed()
 		{
-            String win1 = "Test Window (Press any key to close)"; //The name of the window
-            CvInvoke.NamedWindow(win1); //Create the window using the specific name
+            String win1 = "Test Window (Press any key to close)";
+            CvInvoke.NamedWindow(win1);
             using (Mat frame = new Mat())
             using (this.GetCamera())
                 while (CvInvoke.WaitKey(1) == -1)
