@@ -44,20 +44,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Emgu.CV": {
-              "target": "Package",
-              "version": "[4.7.0.5276, )"
-            },
-            "OpenCV": {
-              "target": "Package",
-              "version": "[2.4.11, )"
-            },
-            "OpenCvSharp4": {
-              "target": "Package",
-              "version": "[4.7.0.20230115, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
