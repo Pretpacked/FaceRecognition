@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nagim/Documents/FaceRecognition/FaceRecognitionTraining/FaceRecognitionTraining.csproj": {}
+    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
   },
   "projects": {
-    "/Users/nagim/Documents/FaceRecognition/FaceRecognitionTraining/FaceRecognitionTraining.csproj": {
+    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nagim/Documents/FaceRecognition/FaceRecognitionTraining/FaceRecognitionTraining.csproj",
+        "projectUniqueName": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
         "projectName": "FaceRecognitionTraining",
-        "projectPath": "/Users/nagim/Documents/FaceRecognition/FaceRecognitionTraining/FaceRecognitionTraining.csproj",
-        "packagesPath": "/Users/nagim/.nuget/packages/",
-        "outputPath": "/Users/nagim/Documents/FaceRecognition/FaceRecognitionTraining/obj/",
+        "projectPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "packagesPath": "C:\\Users\\ricardo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/nagim/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ricardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,6 +52,10 @@
             "Emgu.CV.runtime.windows": {
               "target": "Package",
               "version": "[4.7.0.5276, )"
+            },
+            "Microting.eForm": {
+              "target": "Package",
+              "version": "[7.0.41, )"
             }
           },
           "imports": [
@@ -64,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

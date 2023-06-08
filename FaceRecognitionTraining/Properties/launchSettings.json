@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FaceRecognitionTraining": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
