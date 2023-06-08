@@ -11,5 +11,4 @@ using Emgu.CV.Dai;
 VideoFeed x = new VideoFeed();
 
 
-x.timer1_Tick();
-x.imagesFromDir();
+//x.timer1_Tick();

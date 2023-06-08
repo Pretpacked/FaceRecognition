@@ -13,18 +13,18 @@ using Emgu.CV.Dai;
 using Microsoft.VisualBasic.FileIO;
 using Microting.eForm.Infrastructure.Data.Entities;
 using System.IO;
+using DocumentFormat.OpenXml.Vml;
 
 namespace FaceRecognitionTraining
 {
 	public class VideoFeed
 	{
         public VideoCapture VideoCapture { get; }
-        public string Name { get; }
+        public string WindowName { get; }
 
-        public List<List<string>> FaceDatabase { get; set; }
-
-        public CascadeClassifier Cascade;
-        public EigenFaceRecognizer Recognizer;
+        private List<Image<Gray, byte>> FaceDatabase;
+        private CascadeClassifier Cascade;
+        private EigenFaceRecognizer Recognizer;
 
         private string MyDocuments = Environment.GetFolderPath(
             Environment.SpecialFolder.MyDocuments);
@@ -32,9 +32,11 @@ namespace FaceRecognitionTraining
         public VideoFeed()
 		{
             this.VideoCapture = new VideoCapture(0);
-            this.Name = "window_name";
+            this.WindowName = "window_name";
 
             this.Cascade = new CascadeClassifier(this.MyDocuments + "\\haarcascade_frontalface_alt.xml");
+
+            this.FaceDatabase = this.LoadFaceDatabase();
         }
 
         public void timer1_Tick()
@@ -42,7 +44,7 @@ namespace FaceRecognitionTraining
             try
             {
                 VideoCapture capture = this.VideoCapture;
-                string window_name = this.Name;
+                string window_name = this.WindowName;
                 CvInvoke.NamedWindow(window_name);
 
                 while (true)
@@ -61,14 +63,14 @@ namespace FaceRecognitionTraining
                     CvInvoke.CvtColor(
                         frame, grayFrame, ColorConversion.Bgr2Gray);
 
-                    Rectangle[] faces = this.Cascade.DetectMultiScale(
+                    System.Drawing.Rectangle[] faces = this.Cascade.DetectMultiScale(
                         grayFrame, 1.4, 0);
 
                     Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
                     Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
 
 
-                    foreach (Rectangle face in faces)
+                    foreach (System.Drawing.Rectangle face in faces)
                     {
                         CvInvoke.Rectangle(frame, face, new Bgr(Color.Red).MCvScalar);
 
@@ -88,59 +90,25 @@ namespace FaceRecognitionTraining
         {
             List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
 
-            // Load images from face database 
-            string path = this.MyDocuments + "\\FacesDataSet";
-            string[] files = Directory.GetFiles(
-                path, "*.jpg", System.IO.SearchOption.AllDirectories);
-
-            foreach (string personDir in files)
-            {
-                string personName = Path.GetFileName(personDir);
-
-                string[] imageFiles = Directory.GetFiles(personDir);
-                foreach (string imageFile in imageFiles)
-                {
-                    Image<Gray, byte> faceImage = new Image<Gray, byte>(imageFile);
-                    faceImages.Add(faceImage);
-                }
-            }
-
-            return faceImages;
-        }
-        /*
-        public void imagesFromDir() {
             try
             {
                 string path = this.MyDocuments + "\\FacesDataSet";
                 string[] files = Directory.GetFiles(
                     path, "*.jpg", System.IO.SearchOption.AllDirectories);
-                int i = 0;
 
-                var faceDatabase = new List<List<string>>();
-
-                foreach (var file in files)
+                foreach (string image in files)
                 {
-                    DirectoryInfo directory = Directory.GetParent(file);
-
-                    faceDatabase.Add(
-                        new List<string>());
-                    faceDatabase[i].Add(
-                        directory.Name.ToString());
-                    faceDatabase[i].Add(
-                        file.ToString());
-
-                    i++;
+                    Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
+                    faceImages.Add(faceImage);
+                    //Console.WriteLine(image);
                 }
-                this.FaceDatabase = faceDatabase;
-
-                // testing
-                faceDatabase[3].ForEach(Console.WriteLine);
             }
             catch (Exception ex)
             {
                 this.ExceptionHandeling(ex);
             }
-        }*/
+            return faceImages;
+        }
 
         private void ExceptionHandeling(Exception ex)
         {
