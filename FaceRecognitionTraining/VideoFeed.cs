@@ -110,6 +110,22 @@ namespace FaceRecognitionTraining
             return faceImages;
         }
 
+        public void TrainFaceRecognizer()
+        {
+            List<Mat> faces = new List<Mat>();
+            List<int> labels = new List<int>();
+
+            for (int i = 0; i < this.FaceDatabase.Count; i++)
+            {
+                faces.Add(this.FaceDatabase[i].Mat);
+                labels.Add(i);
+            }
+
+            // Train face recognizer
+            this.Recognizer.Train(faces.ToArray(), labels.ToArray());
+        }
+
+
         private void ExceptionHandeling(Exception ex)
         {
             System.Console.WriteLine(ex);

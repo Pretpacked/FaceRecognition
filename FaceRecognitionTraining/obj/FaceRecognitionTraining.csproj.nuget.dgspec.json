@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
+    "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
+    "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "projectUniqueName": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
         "projectName": "FaceRecognitionTraining",
-        "projectPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
-        "packagesPath": "C:\\Users\\ricardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricardo\\Desktop\\Schoooool\\PROF\\SecureScout\\git@github.comPretpacked\\FaceRecognition.git\\FaceRecognitionTraining\\obj\\",
+        "projectPath": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "packagesPath": "C:\\Users\\nagim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ricardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nagim\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
