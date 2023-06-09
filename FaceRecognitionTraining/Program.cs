@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Presentation;
 using Emgu.CV.Dai;
 
-VideoFeed x = new VideoFeed();
+//VideoFeed x = new VideoFeed();
 
 
 //x.timer1_Tick();
