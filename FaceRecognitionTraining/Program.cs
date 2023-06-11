@@ -32,11 +32,25 @@ namespace FaceRecognitionTraining
 
                 System.Drawing.Rectangle[] faces = detector.DetectFaces(frame);
 
-                foreach (System.Drawing.Rectangle face in faces)
+                if (faces.Length > 0)
                 {
-                    CvInvoke.Rectangle(frame, face, new Bgr(System.Drawing.Color.Red).MCvScalar);
+                    // Select the largest face
+                    System.Drawing.Rectangle largestFace = faces[0];
+                    int largestArea = largestFace.Width * largestFace.Height;
 
-                    Mat grayImage = new Mat(frame, face);
+                    foreach (System.Drawing.Rectangle face in faces)
+                    {
+                        int area = face.Width * face.Height;
+                        if (area > largestArea)
+                        {
+                            largestFace = face;
+                            largestArea = area;
+                        }
+                    }
+
+                    CvInvoke.Rectangle(frame, largestFace, new Bgr(System.Drawing.Color.Red).MCvScalar);
+
+                    Mat grayImage = new Mat(frame, largestFace);
                     Image<Gray, byte> grayImageWithFace = grayImage.ToImage<Gray, byte>();
 
                     trainer.AddTrainingImage(grayImageWithFace);
@@ -65,11 +79,25 @@ namespace FaceRecognitionTraining
 
                 System.Drawing.Rectangle[] faces = detector.DetectFaces(frame);
 
-                foreach (System.Drawing.Rectangle face in faces)
+                if (faces.Length > 0)
                 {
-                    CvInvoke.Rectangle(frame, face, new Bgr(System.Drawing.Color.Red).MCvScalar);
+                    // Select the largest face
+                    System.Drawing.Rectangle largestFace = faces[0];
+                    int largestArea = largestFace.Width * largestFace.Height;
 
-                    Mat grayImage = new Mat(frame, face);
+                    foreach (System.Drawing.Rectangle face in faces)
+                    {
+                        int area = face.Width * face.Height;
+                        if (area > largestArea)
+                        {
+                            largestFace = face;
+                            largestArea = area;
+                        }
+                    }
+
+                    CvInvoke.Rectangle(frame, largestFace, new Bgr(System.Drawing.Color.Red).MCvScalar);
+
+                    Mat grayImage = new Mat(frame, largestFace);
                     Image<Gray, byte> grayImageWithFace = grayImage.ToImage<Gray, byte>();
 
                     engine.RecognizeFacesInImage(grayImageWithFace);
