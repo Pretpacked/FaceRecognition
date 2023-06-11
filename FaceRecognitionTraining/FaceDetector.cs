@@ -11,10 +11,13 @@ namespace FaceRecognitionTraining
     public class FaceDetector
     {
         private CascadeClassifier cascade;
+        private string MyDocuments = Environment.GetFolderPath(
+            Environment.SpecialFolder.MyDocuments);
 
-        public FaceDetector(string cascadePath)
+        public FaceDetector()
         {
-            this.cascade = new CascadeClassifier(cascadePath);
+            this.cascade = new CascadeClassifier(
+                this.MyDocuments + "\\haarcascade_frontalface_alt.xml");
         }
 
         public System.Drawing.Rectangle[] DetectFaces(Mat frame)

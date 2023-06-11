@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
+    "Z:\\Desktop\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
+    "Z:\\Desktop\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "projectUniqueName": "Z:\\Desktop\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
         "projectName": "FaceRecognitionTraining",
-        "projectPath": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
-        "packagesPath": "C:\\Users\\nagim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nagim\\source\\repos\\FaceRecognition\\FaceRecognitionTraining\\obj\\",
+        "projectPath": "Z:\\Desktop\\FaceRecognition\\FaceRecognitionTraining\\FaceRecognitionTraining.csproj",
+        "packagesPath": "C:\\Users\\ricardo\\.nuget\\packages\\",
+        "outputPath": "Z:\\Desktop\\FaceRecognition\\FaceRecognitionTraining\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nagim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ricardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
