@@ -20,6 +20,8 @@ try
     VideoCaptureManager manager = new VideoCaptureManager();
     FaceDetector cascader = new FaceDetector();
     FaceRecognitionEngine engine = new FaceRecognitionEngine();
+    FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
+
     manager.CreateWindow();
     
     while (true) 
@@ -38,56 +40,10 @@ try
             Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
             Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
 
-            //engine.RecognizeFacesInImage(grayImageX);
+            engine.RecognizeFacesInImage(grayImageX);
 
         }
-
         CvInvoke.Imshow(manager.WindowName, frame);
     }
 }
 catch (Exception ex) { System.Console.WriteLine(ex); }
-
-/*
-try
-{
-    VideoCapture capture = this.VideoCapture;
-    string window_name = this.WindowName;
-    CvInvoke.NamedWindow(window_name);
-
-    while (true)
-    {
-        // Get capture by frame and desplay it into the test window.
-        Mat frame = capture.QueryFrame();
-
-        if (frame == null)
-            break;
-
-        //TODO Stops main loop, replace into 'fancyer shutdown'
-        if (CvInvoke.WaitKey(1) == 27)
-            break;
-
-        Mat grayFrame = new Mat();
-        CvInvoke.CvtColor(
-            frame, grayFrame, ColorConversion.Bgr2Gray);
-
-        System.Drawing.Rectangle[] faces = this.Cascade.DetectMultiScale(
-            grayFrame, 1.4, 0);
-
-        Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
-        Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
-
-
-        foreach (System.Drawing.Rectangle face in faces)
-        {
-            CvInvoke.Rectangle(frame, face, new Bgr(Color.Red).MCvScalar);
-
-            System.Console.WriteLine(face + " gedectecteerd");
-        }
-
-        CvInvoke.Imshow(window_name, frame);
-    }
-}
-catch (Exception ex)
-{
-    this.ExceptionHandeling(ex);
-}*/
