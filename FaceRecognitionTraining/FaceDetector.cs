@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FaceRecognitionTraining
 {
@@ -24,7 +25,13 @@ namespace FaceRecognitionTraining
         {
             Mat grayFrame = new Mat();
             CvInvoke.CvtColor(frame, grayFrame, ColorConversion.Bgr2Gray);
-            return cascade.DetectMultiScale(grayFrame, 1.4, 0);
+
+            double scaleFactor = 1.1;
+            int minNeighbors = 3;
+
+            return cascade.DetectMultiScale(grayFrame, scaleFactor, minNeighbors, Size.Empty);
         }
+
+
     }
 }
