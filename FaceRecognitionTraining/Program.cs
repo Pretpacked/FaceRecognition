@@ -3,46 +3,83 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Face;
 using Emgu.CV.Structure;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace FaceRecognitionTraining
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            try
-            {
-                VideoCaptureManager manager = new VideoCaptureManager();
-                FaceDetector cascader = new FaceDetector();
-                FaceRecognitionEngine engine = new FaceRecognitionEngine();
-                manager.CreateWindow();
+            VideoCaptureManager manager = new VideoCaptureManager();
+            FaceDetector detector = new FaceDetector();
+            FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
+            FaceRecognitionEngine engine = new FaceRecognitionEngine();
+            manager.CreateWindow();
 
-                while (true)
+            while (true)
+            {
+                Mat frame = manager.GetFrame();
+
+                if (frame == null)
+                    break;
+
+                if (CvInvoke.WaitKey(1) == 27)
                 {
-                    Mat frame = manager.GetFrame();
-
-                    if ((CvInvoke.WaitKey(1) & 0xFF) == 27) { manager.Release(); break; }
-
-                    System.Drawing.Rectangle[] faces = cascader.DetectFaces(frame);
-
-                    foreach (System.Drawing.Rectangle face in faces)
-                    {
-                        CvInvoke.Rectangle(frame, face, new Bgr(Color.Red).MCvScalar);
-
-                        Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
-                        Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
-
-                        //engine.RecognizeFacesInImage(grayImageX);
-                    }
-
-                    CvInvoke.Imshow(manager.WindowName, frame);
+                    manager.Release();
+                    break;
                 }
+
+                System.Drawing.Rectangle[] faces = detector.DetectFaces(frame);
+
+                foreach (System.Drawing.Rectangle face in faces)
+                {
+                    CvInvoke.Rectangle(frame, face, new Bgr(System.Drawing.Color.Red).MCvScalar);
+
+                    Mat grayImage = new Mat(frame, face);
+                    Image<Gray, byte> grayImageWithFace = grayImage.ToImage<Gray, byte>();
+
+                    trainer.AddTrainingImage(grayImageWithFace);
+                    grayImage.Dispose();
+                }
+
+                CvInvoke.Imshow(manager.WindowName, frame);
             }
-            catch (Exception ex)
+
+            trainer.Train();
+            EigenFaceRecognizer recognizer = trainer.GetRecognizer();
+            engine.SetRecognizer(recognizer);
+
+            while (true)
             {
-                Console.WriteLine(ex);
+                Mat frame = manager.GetFrame();
+
+                if (frame == null)
+                    break;
+
+                if (CvInvoke.WaitKey(1) == 27)
+                {
+                    manager.Release();
+                    break;
+                }
+
+                System.Drawing.Rectangle[] faces = detector.DetectFaces(frame);
+
+                foreach (System.Drawing.Rectangle face in faces)
+                {
+                    CvInvoke.Rectangle(frame, face, new Bgr(System.Drawing.Color.Red).MCvScalar);
+
+                    Mat grayImage = new Mat(frame, face);
+                    Image<Gray, byte> grayImageWithFace = grayImage.ToImage<Gray, byte>();
+
+                    engine.RecognizeFacesInImage(grayImageWithFace);
+                    grayImage.Dispose();
+                }
+
+                CvInvoke.Imshow(manager.WindowName, frame);
             }
+
+            CvInvoke.DestroyAllWindows();
         }
     }
 }
