@@ -14,7 +14,7 @@ namespace FaceRecognitionTraining
         private List<Image<Gray, byte>> faceDatabase;
         private EigenFaceRecognizer recognizer;
 
-        public FaceRecognizerTrainer(List<Image<Gray, byte>> faceDatabase)
+        public FaceRecognizerTrainer(/*List<Image<Gray, byte>> faceDatabase*/)
         {
             this.faceDatabase = faceDatabase;
             this.recognizer = new EigenFaceRecognizer();
@@ -32,6 +32,14 @@ namespace FaceRecognitionTraining
             }
 
             recognizer.Train(faces.ToArray(), labels.ToArray());
+        }
+        public void AddTrainingImage(Image<Gray, byte> image)
+        {
+            faceDatabase.Add(image);
+        }
+        public EigenFaceRecognizer GetRecognizer()
+        {
+            return recognizer;
         }
     }
 }

@@ -20,6 +20,12 @@ namespace FaceRecognitionTraining
 
         public void RecognizeFacesInImage(Image<Gray, byte> image)
         {
+            if (recognizer == null)
+            {
+                Console.WriteLine("Error: The recognizer is not set. Please set the recognizer before calling RecognizeFacesInImage.");
+                return;
+            }
+
             var result = recognizer.Predict(image.Mat);
 
             int predictedLabel = result.Label;
