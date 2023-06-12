@@ -20,9 +20,12 @@ try
     VideoCaptureManager manager = new VideoCaptureManager();
     FaceDetector cascader = new FaceDetector();
     FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
-    FaceRecognitionEngine engine = new FaceRecognitionEngine();
+    FaceRecognitionEngine engine = new FaceRecognitionEngine(
+        trainer.GetRecognizer());
 
     trainer.TrainFaceRecognizer();
+
+    EigenFaceRecognizer test = trainer.GetRecognizer();
 
     manager.CreateWindow();
     
@@ -45,7 +48,6 @@ try
             Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
 
             engine.RecognizeFacesInImage(grayImageX);
-
         }
         CvInvoke.Imshow(manager.WindowName, frame);
     }

@@ -14,30 +14,14 @@ namespace FaceRecognitionTraining
         private List<Image<Gray, byte>> faceDatabase;
         private EigenFaceRecognizer recognizer;
         private FaceDetector detector;
-        private FaceRecognitionEngine engine;
 
-        public FaceRecognizerTrainer(/*List<Image<Gray, byte>> faceDatabase*/)
+        public FaceRecognizerTrainer()
         {
             this.detector = new FaceDetector();
             this.recognizer = new EigenFaceRecognizer();
-            this.faceDatabase = this.LoadFaceDatabase();
-            this.recognizer = new EigenFaceRecognizer();
+            this.faceDatabase = this.LoadFaceDatabase();    
         }
 
-        /*
-        public void Train()
-        {
-            List<Mat> faces = new List<Mat>();
-            List<int> labels = new List<int>();
-
-            for (int i = 0; i < faceDatabase.Count; i++)
-            {
-                faces.Add(faceDatabase[i].Mat);
-                labels.Add(i);
-            }
-
-            recognizer.Train(faces.ToArray(), labels.ToArray());
-        }*/
         public void AddTrainingImage(Image<Gray, byte> image)
         {
             faceDatabase.Add(image);
@@ -46,7 +30,6 @@ namespace FaceRecognitionTraining
         {
             return recognizer;
         }
-
 
         private List<Image<Gray, byte>> LoadFaceDatabase()
         {
@@ -80,7 +63,5 @@ namespace FaceRecognitionTraining
             // Train face recognizer
             this.recognizer.Train(faces.ToArray(), labels.ToArray());
         }
-
-
     }
 }

@@ -13,9 +13,9 @@ namespace FaceRecognitionTraining
     {
         private EigenFaceRecognizer recognizer;
 
-        public FaceRecognitionEngine()
+        public FaceRecognitionEngine(EigenFaceRecognizer recognizer)
         {
-            this.recognizer = new EigenFaceRecognizer();
+            this.recognizer = recognizer;
         }
 
         public void RecognizeFacesInImage(Image<Gray, byte> image)
