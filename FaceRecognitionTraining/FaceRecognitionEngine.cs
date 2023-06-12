@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
 
 namespace FaceRecognitionTraining
 {
@@ -26,7 +27,8 @@ namespace FaceRecognitionTraining
                 return;
             }
 
-            var result = recognizer.Predict(image.Mat);
+            var result = recognizer.Predict(
+                image.Resize(100, 100, Inter.Linear).Mat);
 
             int predictedLabel = result.Label;
             double distance = result.Distance;

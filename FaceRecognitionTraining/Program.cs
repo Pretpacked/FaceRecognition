@@ -39,9 +39,13 @@ try
             System.Console.WriteLine(face); 
 
             Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
+            inputImage.Resize(100 ,100, Inter.Linear);
+
             Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
 
             engine.RecognizeFacesInImage(grayImageX);
+
+        
         }
         CvInvoke.Imshow(manager.WindowName, frame);
     }

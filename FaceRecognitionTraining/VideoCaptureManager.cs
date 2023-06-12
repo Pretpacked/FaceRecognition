@@ -15,8 +15,7 @@ namespace FaceRecognitionTraining
         public VideoCaptureManager()
         {
             this.videoCapture = new VideoCapture(0);
-            this.WindowName = "test window";
-                
+            this.WindowName = "test window";   
         }
 
         public Mat GetFrame()

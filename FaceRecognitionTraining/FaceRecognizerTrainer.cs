@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace FaceRecognitionTraining
 {
@@ -15,6 +16,9 @@ namespace FaceRecognitionTraining
         private List<Image<Gray, byte>> faceDatabase;
         private EigenFaceRecognizer recognizer;
         private FaceDetector detector;
+
+        public int width { get; set; }
+        public int height { get; set; }
 
         public FaceRecognizerTrainer()
         {
@@ -43,7 +47,8 @@ namespace FaceRecognitionTraining
             foreach (string image in files)
             {
                 Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
-                faceImages.Add(faceImage);
+
+                faceImages.Add(faceImage.Resize(100, 100, Inter.Linear));
             }
 
             return faceImages;
@@ -56,10 +61,7 @@ namespace FaceRecognitionTraining
 
             for (int i = 0; i < this.faceDatabase.Count; i++)
             {
-                Image<Gray, byte> image;
-
-                image = this.faceDatabase[i].Resize(554.256258422, 554.256258422, Inter.Linear); // Resize the training image to the desired dimensions
-                faces.Add(image.Mat);
+                faces.Add(this.faceDatabase[i].Mat);
                 labels.Add(i);
             }
 
