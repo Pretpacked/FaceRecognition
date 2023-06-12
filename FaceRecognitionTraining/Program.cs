@@ -9,12 +9,6 @@ using DocumentFormat.OpenXml.Presentation;
 using Emgu.CV.Dai;
 using System;
 using DocumentFormat.OpenXml.Wordprocessing;
-
-//VideoFeed x = new VideoFeed();
-
-
-//x.timer1_Tick();
-
 try 
 {
     VideoCaptureManager manager = new VideoCaptureManager();

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV.Structure;
+using Emgu.CV.CvEnum;
 
 namespace FaceRecognitionTraining
 {
@@ -55,8 +56,10 @@ namespace FaceRecognitionTraining
 
             for (int i = 0; i < this.faceDatabase.Count; i++)
             {
-                System.Console.WriteLine(this.faceDatabase[i].ToString());
-                faces.Add(this.faceDatabase[i].Mat);
+                Image<Gray, byte> image;
+
+                image = this.faceDatabase[i].Resize(554.256258422, 554.256258422, Inter.Linear); // Resize the training image to the desired dimensions
+                faces.Add(image.Mat);
                 labels.Add(i);
             }
 
