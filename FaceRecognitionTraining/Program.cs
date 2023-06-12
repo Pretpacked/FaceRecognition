@@ -19,8 +19,10 @@ try
 {
     VideoCaptureManager manager = new VideoCaptureManager();
     FaceDetector cascader = new FaceDetector();
-    FaceRecognitionEngine engine = new FaceRecognitionEngine();
     FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
+    FaceRecognitionEngine engine = new FaceRecognitionEngine();
+
+    trainer.TrainFaceRecognizer();
 
     manager.CreateWindow();
     
@@ -36,6 +38,8 @@ try
         {
             CvInvoke.Rectangle(frame, face, 
                 new Bgr(System.Drawing.Color.Red).MCvScalar);
+
+            System.Console.WriteLine(face); 
 
             Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
             Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();

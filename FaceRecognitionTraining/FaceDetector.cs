@@ -11,7 +11,7 @@ namespace FaceRecognitionTraining
     public class FaceDetector
     {
         private CascadeClassifier cascade;
-        private string MyDocuments = Environment.GetFolderPath(
+        public string MyDocuments = Environment.GetFolderPath(
             Environment.SpecialFolder.MyDocuments);
 
         public FaceDetector()
@@ -28,7 +28,7 @@ namespace FaceRecognitionTraining
             double scaleFactor = 1.1;
             int minNeighbors = 3;
 
-            return cascade.DetectMultiScale(grayFrame, scaleFactor, minNeighbors, Size.Empty);
+            return cascade.DetectMultiScale(grayFrame, scaleFactor, minNeighbors);
         }
     }
 }
