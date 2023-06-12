@@ -10,12 +10,17 @@ using Emgu.CV.Dai;
 using System;
 using DocumentFormat.OpenXml.Wordprocessing;
 
+//VideoFeed x = new VideoFeed();
+
+
+//x.timer1_Tick();
+
 try 
 {
     VideoCaptureManager manager = new VideoCaptureManager();
     FaceDetector cascader = new FaceDetector();
     FaceRecognitionEngine engine = new FaceRecognitionEngine();
-    //FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
+    FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
 
     manager.CreateWindow();
     
@@ -32,12 +37,10 @@ try
             CvInvoke.Rectangle(frame, face, 
                 new Bgr(System.Drawing.Color.Red).MCvScalar);
 
-            System.Console.WriteLine(face);
-
             Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
             Image<Gray, byte> grayImageX = inputImage.Convert<Gray, byte>();
 
-            //engine.RecognizeFacesInImage(grayImageX);
+            engine.RecognizeFacesInImage(grayImageX);
 
         }
         CvInvoke.Imshow(manager.WindowName, frame);
