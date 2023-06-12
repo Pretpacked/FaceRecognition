@@ -13,11 +13,11 @@ namespace FaceRecognitionTraining
     {
         private List<Image<Gray, byte>> faceDatabase;
         private EigenFaceRecognizer recognizer;
-
-        public FaceRecognizerTrainer(List<Image<Gray, byte>> faceDatabase)
+        private FaceDetector detector;
+        public FaceRecognizerTrainer()
         {
-            this.faceDatabase = faceDatabase;
             this.recognizer = new EigenFaceRecognizer();
+            this.faceDatabase = this.LoadFaceDatabase();
         }
 
         public void Train()
@@ -32,6 +32,27 @@ namespace FaceRecognitionTraining
             }
 
             recognizer.Train(faces.ToArray(), labels.ToArray());
+        }
+
+        private List<Image<Gray, byte>> LoadFaceDatabase()
+        {
+            List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
+
+            try
+            {
+                string path = detector.MyDocuments + "\\FaceDatabase";
+                string[] files = Directory.GetFiles(
+                    path, "*.jpg", System.IO.SearchOption.AllDirectories);
+
+                foreach (string image in files)
+                {
+                    Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
+                    faceImages.Add(faceImage);
+                }
+            }
+            catch (Exception ex) { System.Console.WriteLine(ex); }
+                
+            return faceImages;
         }
     }
 }
