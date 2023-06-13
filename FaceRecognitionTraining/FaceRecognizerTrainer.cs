@@ -17,12 +17,9 @@ namespace FaceRecognitionTraining
         private EigenFaceRecognizer recognizer;
         private FaceDetector detector;
 
-        public int width { get; set; }
-        public int height { get; set; }
-
-        public FaceRecognizerTrainer()
+        public FaceRecognizerTrainer(FaceDetector casader)
         {
-            this.detector = new FaceDetector();
+            this.detector = casader;
             this.recognizer = new EigenFaceRecognizer();
             this.faceDatabase = this.LoadFaceDatabase();    
         }
@@ -40,7 +37,7 @@ namespace FaceRecognitionTraining
         {
             List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
 
-            string path = this.detector.MyDocuments + "\\FaceDatabase";
+            string path = this.detector.GetDocumentsLocation() + "\\FaceDatabase";
             string[] files = Directory.GetFiles(
                 path, "*.jpg", System.IO.SearchOption.AllDirectories);
 

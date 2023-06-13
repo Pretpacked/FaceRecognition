@@ -13,7 +13,7 @@ try
 {
     VideoCaptureManager manager = new VideoCaptureManager();
     FaceDetector cascader = new FaceDetector();
-    FaceRecognizerTrainer trainer = new FaceRecognizerTrainer();
+    FaceRecognizerTrainer trainer = new FaceRecognizerTrainer(cascader);
     FaceRecognitionEngine engine = new FaceRecognitionEngine(
         trainer.GetRecognizer());
 
@@ -47,7 +47,7 @@ try
 
         
         }
-        CvInvoke.Imshow(manager.WindowName, frame);
+        CvInvoke.Imshow(manager.GetWindowName(), frame);
     }
 }
 catch (Exception ex) { System.Console.WriteLine(ex); }

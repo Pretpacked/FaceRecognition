@@ -10,7 +10,7 @@ namespace FaceRecognitionTraining
     public class VideoCaptureManager
     {
         private VideoCapture videoCapture;
-        public string WindowName { get; }
+        private string WindowName;
 
         public VideoCaptureManager()
         {
@@ -27,6 +27,8 @@ namespace FaceRecognitionTraining
             }
             return frame;
         }
+
+        public string GetWindowName() { return this.WindowName; }
 
         public void CreateWindow() {
             CvInvoke.NamedWindow(this.WindowName);
