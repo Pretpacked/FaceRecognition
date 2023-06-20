@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Drawing;
 
 namespace FaceRecognitionTraining
 {
+    public enum LabelWithNames { };
+
     public class FaceRecognizerTrainer
     {
-        private List<Image<Gray, byte>> faceDatabase;
+        private List<FaceImage> faceDatabase;
         private EigenFaceRecognizer recognizer;
         private FaceDetector detector;
 
         public FaceRecognizerTrainer(FaceDetector casader)
         {
+            this.faceDatabase = new List<FaceImage>();
             this.detector = casader;
             this.recognizer = new EigenFaceRecognizer();
-            this.faceDatabase = this.LoadFaceDatabase();    
+            this.LoadFaceDatabase();    
         }
 
-        public void AddTrainingImage(Image<Gray, byte> image)
-        {
-            faceDatabase.Add(image);
-        }
         public EigenFaceRecognizer GetRecognizer()
         {
             return recognizer;
         }
 
-        private List<Image<Gray, byte>> LoadFaceDatabase()
+        private void LoadFaceDatabase()
         {
             List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
 
@@ -43,12 +43,12 @@ namespace FaceRecognitionTraining
 
             foreach (string image in files)
             {
+                string[] fullFileName = Path.GetFileNameWithoutExtension(image).Split('_');
+
                 Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
-
-                faceImages.Add(faceImage.Resize(100, 100, Inter.Linear));
+                FaceImage x = new FaceImage(faceImage, fullFileName);
+                this.faceDatabase.Add(x);
             }
-
-            return faceImages;
         }
 
         public void TrainFaceRecognizer()
@@ -58,8 +58,8 @@ namespace FaceRecognitionTraining
 
             for (int i = 0; i < this.faceDatabase.Count; i++)
             {
-                faces.Add(this.faceDatabase[i].Mat);
-                labels.Add(i);
+                faces.Add(this.faceDatabase[i].GetImage().Mat);
+                labels.Add(this.faceDatabase[i].GetLabel());
             }
 
             // Train face recognizer

@@ -9,6 +9,7 @@ using DocumentFormat.OpenXml.Presentation;
 using Emgu.CV.Dai;
 using System;
 using DocumentFormat.OpenXml.Wordprocessing;
+
 try 
 {
     VideoCaptureManager manager = new VideoCaptureManager();
@@ -18,8 +19,6 @@ try
         trainer.GetRecognizer());
 
     trainer.TrainFaceRecognizer();
-
-    EigenFaceRecognizer test = trainer.GetRecognizer();
 
     manager.CreateWindow();
     
@@ -35,8 +34,6 @@ try
         {
             CvInvoke.Rectangle(frame, face, 
                 new Bgr(System.Drawing.Color.Red).MCvScalar);
-
-            System.Console.WriteLine(face); 
 
             Image<Bgr, byte> inputImage = frame.ToImage<Bgr, byte>();
             inputImage.Resize(100 ,100, Inter.Linear);
