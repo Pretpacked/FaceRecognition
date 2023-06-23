@@ -1,38 +1,24 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 
-public class FaceImage
+namespace FaceRecognitionTraining
 {
-    private Image<Gray, byte> faceImage;
-    private string[] fullFileName;
-
-    public FaceImage(Image<Gray, byte> faceImage, string[] fullFileName)
+    public class FaceImage
     {
-        this.faceImage = faceImage;
-        this.fullFileName = fullFileName;
-    }
+        private Image<Gray, byte> faceImage;
+        private string parentFolderName;
+        private int label;
 
-    public Image<Gray, byte> GetImage()
-    {
-        return this.faceImage.Resize(100, 100, Emgu.CV.CvEnum.Inter.Linear);
-    }
-
-    public string GetFullFileName()
-    {
-        return this.fullFileName[0];
-    }
-
-
-    public int GetLabel()
-    {
-        if (int.TryParse(this.fullFileName[0], out int label))
+        public FaceImage(Image<Gray, byte> faceImage, string parentFolderName, int label)
         {
-            return label;
+            this.faceImage = faceImage;
+            this.parentFolderName = parentFolderName;
+            this.label = label;
         }
-        else
-        {
-            // Handle parsing error, return a default label
-            return -1;
-        }
+
+        public Image<Gray, byte> GetImage() { return this.faceImage.Resize(100, 100, Inter.Linear); }
+        public string GetParentFolderName() { return this.parentFolderName; }
+        public int GetLabel() { return this.label; }
     }
 }

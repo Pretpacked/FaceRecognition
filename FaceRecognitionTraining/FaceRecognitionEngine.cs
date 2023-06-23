@@ -1,33 +1,42 @@
-﻿using Emgu.CV.Face;
-using Emgu.CV;
+﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Face;
 using Emgu.CV.Structure;
+using System;
 
-public class FaceRecognitionEngine
+namespace FaceRecognitionTraining
 {
-    private EigenFaceRecognizer recognizer;
-    private Dictionary<int, string> labelMap;
-
-    public FaceRecognitionEngine(EigenFaceRecognizer recognizer, Dictionary<int, string> labelMap)
+    public class FaceRecognitionEngine
     {
-        this.recognizer = recognizer;
-        this.labelMap = labelMap;
-    }
+        private EigenFaceRecognizer recognizer;
+        private FaceRecognizerTrainer trainer;
 
-    public void RecognizeFacesInImage(Image<Gray, byte> image)
-    {
-        if (recognizer == null)
+        public FaceRecognitionEngine(FaceRecognizerTrainer trainer)
         {
-            Console.WriteLine("Error: The recognizer is not set. Please set the recognizer before calling RecognizeFacesInImage.");
-            return;
+            this.trainer = trainer;
+            this.recognizer = trainer.GetRecognizer();
         }
 
-        var result = recognizer.Predict(image.Resize(100, 100, Emgu.CV.CvEnum.Inter.Linear).Mat);
+        public void RecognizeFacesInImage(Image<Gray, byte> image)
+        {
+            if (recognizer == null)
+            {
+                Console.WriteLine("Error: The recognizer is not set. Please set the recognizer before calling RecognizeFacesInImage.");
+                return;
+            }
 
-        int predictedLabel = result.Label;
-        string predictedName = labelMap.ContainsKey(predictedLabel) ? labelMap[predictedLabel] : "Unknown";
-        double distance = result.Distance;
+            var result = recognizer.Predict(image.Resize(100, 100, Inter.Linear).Mat);
 
-        Console.WriteLine("Predicted Label: " + predictedName);
-        Console.WriteLine("Distance: " + distance);
+            int predictedLabel = result.Label;
+            double distance = result.Distance;
+
+            // Retrieve the face image from the faceDatabase using the predictedLabel
+            var face = trainer.GetFaceDatabase().Find(f => f.GetLabel() == predictedLabel);
+            string parentFolderName = face != null ? face.GetParentFolderName() : "Unknown";
+
+            Console.WriteLine("Predicted Label: " + predictedLabel);
+            Console.WriteLine("Distance: " + distance);
+            Console.WriteLine("Parent Folder Name: " + parentFolderName);
+        }
     }
 }

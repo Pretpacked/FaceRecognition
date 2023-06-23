@@ -1,38 +1,41 @@
 ﻿using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using System;
 
-public class VideoCaptureManager
+namespace FaceRecognitionTraining
 {
-    private VideoCapture videoCapture;
-    private string windowName;
-
-    public VideoCaptureManager()
+    public class VideoCaptureManager
     {
-        this.videoCapture = new VideoCapture(0);
-        this.windowName = "test window";
-    }
+        private VideoCapture videoCapture;
+        private string WindowName;
 
-    public Mat GetFrame()
-    {
-        Mat frame = this.videoCapture.QueryFrame();
-        if (frame == null)
+        public VideoCaptureManager()
         {
-            this.Release();
+            this.videoCapture = new VideoCapture(0);
+            this.WindowName = "test window";
         }
-        return frame;
-    }
 
-    public string GetWindowName()
-    {
-        return this.windowName;
-    }
+        public Mat GetFrame()
+        {
+            Mat frame = this.videoCapture.QueryFrame();
+            if (frame == null)
+            {
+                this.Release();
+            }
+            return frame;
+        }
 
-    public void CreateWindow()
-    {
-        CvInvoke.NamedWindow(this.windowName);
-    }
+        public string GetWindowName() { return this.WindowName; }
 
-    public void Release()
-    {
-        videoCapture.Dispose();
+        public void CreateWindow()
+        {
+            CvInvoke.NamedWindow(this.WindowName);
+        }
+
+        public void Release()
+        {
+            videoCapture.Dispose();
+        }
     }
 }
