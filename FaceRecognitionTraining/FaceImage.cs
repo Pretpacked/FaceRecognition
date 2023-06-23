@@ -1,28 +1,38 @@
 ﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FaceRecognitionTraining
+public class FaceImage
 {
-    internal class FaceImage
+    private Image<Gray, byte> faceImage;
+    private string[] fullFileName;
+
+    public FaceImage(Image<Gray, byte> faceImage, string[] fullFileName)
     {
-        private Image<Gray, byte> faceImage;
-        private string[] fullFileName;
+        this.faceImage = faceImage;
+        this.fullFileName = fullFileName;
+    }
 
-        public FaceImage(Image<Gray, byte> faceImage, string[] fullFileName)
+    public Image<Gray, byte> GetImage()
+    {
+        return this.faceImage.Resize(100, 100, Emgu.CV.CvEnum.Inter.Linear);
+    }
+
+    public string GetFullFileName()
+    {
+        return this.fullFileName[0];
+    }
+
+
+    public int GetLabel()
+    {
+        if (int.TryParse(this.fullFileName[0], out int label))
         {
-            this.faceImage = faceImage;
-            this.fullFileName = fullFileName;
+            return label;
         }
-
-        public Image<Gray, Byte> GetImage() { return this.faceImage.Resize(100, 100, Inter.Linear); }
-        public string GetFullFileName() { return this.fullFileName[1]; }
-        public int GetLabel() { return Convert.ToInt16(this.fullFileName[0]); }
-
+        else
+        {
+            // Handle parsing error, return a default label
+            return -1;
+        }
     }
 }

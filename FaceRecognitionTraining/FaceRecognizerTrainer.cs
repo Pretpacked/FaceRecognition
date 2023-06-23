@@ -1,69 +1,74 @@
-﻿using Emgu.CV.Face;
+﻿using Emgu.CV.CvEnum;
+using Emgu.CV.Face;
+using Emgu.CV.Util;
 using Emgu.CV;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using System.Drawing;
 
-namespace FaceRecognitionTraining
+public class FaceRecognizerTrainer
 {
-    public enum LabelWithNames { };
+    public List<FaceImage> faceDatabase;
+    private EigenFaceRecognizer recognizer;
+    private FaceDetector detector;
 
-    public class FaceRecognizerTrainer
+    public FaceRecognizerTrainer(FaceDetector cascader)
     {
-        private List<FaceImage> faceDatabase;
-        private EigenFaceRecognizer recognizer;
-        private FaceDetector detector;
+        this.faceDatabase = new List<FaceImage>();
+        this.detector = cascader;
+        this.recognizer = new EigenFaceRecognizer();
+        this.LoadFaceDatabase();
+    }
 
-        public FaceRecognizerTrainer(FaceDetector casader)
+    public EigenFaceRecognizer GetRecognizer()
+    {
+        return recognizer;
+    }
+
+    private void LoadFaceDatabase()
+    {
+        faceDatabase.Clear();
+
+        string path = Path.Combine(this.detector.GetDocumentsLocation(), "FaceDatabase");
+        string[] files = Directory.GetFiles(path, "*.jpg", SearchOption.AllDirectories);
+
+        foreach (string image in files)
         {
-            this.faceDatabase = new List<FaceImage>();
-            this.detector = casader;
-            this.recognizer = new EigenFaceRecognizer();
-            this.LoadFaceDatabase();    
+            string[] fullFileName = Path.GetFileNameWithoutExtension(image).Split('_');
+
+            Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
+            FaceImage x = new FaceImage(faceImage, fullFileName);
+            this.faceDatabase.Add(x);
         }
+    }
 
-        public EigenFaceRecognizer GetRecognizer()
+    public void TrainFaceRecognizer()
+    {
+        List<Mat> faces = new List<Mat>();
+        List<int> labels = new List<int>();
+        Dictionary<string, int> labelMap = new Dictionary<string, int>();
+
+        int currentLabel = 0;
+
+        foreach (FaceImage faceImage in this.faceDatabase)
         {
-            return recognizer;
-        }
+            Mat faceMat = faceImage.GetImage().Mat;
+            int label = faceImage.GetLabel();
 
-        private void LoadFaceDatabase()
-        {
-            List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
-
-            string path = this.detector.GetDocumentsLocation() + "\\FaceDatabase";
-            string[] files = Directory.GetFiles(
-                path, "*.jpg", System.IO.SearchOption.AllDirectories);
-
-            foreach (string image in files)
+            if (!labelMap.ContainsKey(label.ToString()))
             {
-                string[] fullFileName = Path.GetFileNameWithoutExtension(image).Split('_');
-
-                Image<Gray, byte> faceImage = new Image<Gray, byte>(image);
-                FaceImage x = new FaceImage(faceImage, fullFileName);
-                this.faceDatabase.Add(x);
-            }
-        }
-
-        public void TrainFaceRecognizer()
-        {
-            List<Mat> faces = new List<Mat>();
-            List<int> labels = new List<int>();
-
-            for (int i = 0; i < this.faceDatabase.Count; i++)
-            {
-                faces.Add(this.faceDatabase[i].GetImage().Mat);
-                labels.Add(this.faceDatabase[i].GetLabel());
+                labelMap[label.ToString()] = currentLabel;
+                currentLabel++;
             }
 
-            // Train face recognizer
-            this.recognizer.Train(faces.ToArray(), labels.ToArray());
+            faces.Add(faceMat);
+            labels.Add(labelMap[label.ToString()]);
         }
+
+        // Convert faces and labels to the appropriate input types
+        var facesInput = new VectorOfMat(faces.ToArray());
+        var labelsInput = new Mat(labels.Count, 1, DepthType.Cv32S, 1);
+        labelsInput.SetTo(labels.ToArray());
+
+        // Train face recognizer
+        recognizer.Train(facesInput, labelsInput);
     }
 }
