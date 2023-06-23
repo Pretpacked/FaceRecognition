@@ -32,30 +32,29 @@ namespace FaceRecognitionTraining
 
         private void LoadFaceDatabase()
         {
-            List<Image<Gray, byte>> faceImages = new List<Image<Gray, byte>>();
-
             string path = this.detector.GetDocumentsLocation() + "\\FaceDatabase";
+            string[] directories = Directory.GetDirectories(path);
 
-            if (Directory.Exists(path))
+            int label = 1; // Start with label 1
+
+            foreach (string directory in directories)
             {
-                string[] folders = Directory.GetDirectories(path);
+                string folderName = Path.GetFileName(directory);
+                string[] files = Directory.GetFiles(directory, "*.jpg");
 
-                foreach (string folderPath in folders)
+                foreach (string file in files)
                 {
-                    string parentFolderName = Path.GetFileName(folderPath);
-
-                    string[] files = Directory.GetFiles(folderPath, "*.jpg");
-
-                    foreach (string filePath in files)
-                    {
-                        Image<Gray, byte> image = new Image<Gray, byte>(filePath);
-                        int label = int.Parse(Path.GetFileNameWithoutExtension(filePath));
-
-                        faceDatabase.Add(new FaceImage(image, parentFolderName, label));
-                    }
+                    Image<Gray, byte> faceImage = new Image<Gray, byte>(file);
+                    FaceImage x = new FaceImage(faceImage, folderName, label);
+                    this.faceDatabase.Add(x);
                 }
+
+                label++; // Increment label for the next folder
             }
         }
+
+
+
 
         public void TrainFaceRecognizer()
         {

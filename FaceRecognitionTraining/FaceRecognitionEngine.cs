@@ -34,9 +34,18 @@ namespace FaceRecognitionTraining
             var face = trainer.GetFaceDatabase().Find(f => f.GetLabel() == predictedLabel);
             string parentFolderName = face != null ? face.GetParentFolderName() : "Unknown";
 
-            Console.WriteLine("Predicted Label: " + predictedLabel);
             Console.WriteLine("Distance: " + distance);
-            Console.WriteLine("Parent Folder Name: " + parentFolderName);
+
+            if (distance <= 5000) 
+            {
+                Console.WriteLine("Predicted Label: " + predictedLabel);
+                Console.WriteLine("Parent Folder Name: " + parentFolderName);
+            }
+            else
+            {
+                Console.WriteLine("Not sure about the prediction. Accuracy is below the threshold.");
+            }
         }
+
     }
 }
